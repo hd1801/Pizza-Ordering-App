@@ -1,25 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Navbar, Container, Nav } from "react-bootstrap";
+import { Link, Route, Routes } from "react-router-dom";
+
 
 function App() {
+  const linkStyle = {
+    textDecoration: "none",
+    color:"#fff"
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    <Navbar bg="danger" variant="dark" >
+      <Container fluid={true} className="shadow">
+        <Navbar.Brand>
+        Pizza Ordering App
+        </Navbar.Brand>
+        <Nav className="justify-content-end">
+        <Nav.Link > <Link style={linkStyle} to="/login">Login</Link></Nav.Link>
+        <Nav.Link > <Link style={linkStyle} to="/cart">Cart</Link></Nav.Link>
+        <Nav.Link > <Link style={linkStyle} to="/history">History</Link></Nav.Link>
+        </Nav>    
+      </Container>
+    </Navbar>
+    <Routes>
+      <Route path="/" element = {<>home</>}></Route>
+      <Route path="/login" element = {<>login</>}></Route>
+      <Route path="/cart" element = {<>cart</>}></Route>
+      <Route path="/history" element = {<>history</>}></Route>
+    </Routes>
+    </>
   );
 }
 

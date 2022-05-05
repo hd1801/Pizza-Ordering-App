@@ -19,6 +19,7 @@ function App() {
         Pizza Ordering App
         </Navbar.Brand>
         <Nav className="justify-content-end">
+        <Nav.Link > <Link style={linkStyle} to="/">Home</Link></Nav.Link>
         <Nav.Link > <Link style={linkStyle} to="/login">Login</Link></Nav.Link>
         <Nav.Link > <Link style={linkStyle} to="/cart">Cart</Link></Nav.Link>
         <Nav.Link > <Link style={linkStyle} to="/history">History</Link></Nav.Link>

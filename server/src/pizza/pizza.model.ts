@@ -1,4 +1,11 @@
-import { Column, Model, Table, DataType, HasMany } from 'sequelize-typescript';
+import {
+  Column,
+  Model,
+  Table,
+  DataType,
+  HasMany,
+  ForeignKey,
+} from 'sequelize-typescript';
 
 @Table
 export class Pizza extends Model {
@@ -6,8 +13,8 @@ export class Pizza extends Model {
   pizza_id: number;
   @Column({ type: DataType.STRING, allowNull: false })
   crust_size: number;
-  @HasMany(() => Ingredients)
-  ingredients: Ingredients[];
+  @HasMany(() => PizzaIngredients)
+  ingredients: PizzaIngredients[];
 }
 
 @Table
@@ -22,8 +29,10 @@ export class Ingredients extends Model {
 export class PizzaIngredients extends Model {
   @Column({ type: DataType.INTEGER, primaryKey: true })
   id: number;
+  @ForeignKey(() => Pizza)
   @Column({ type: DataType.INTEGER, allowNull: false })
   pizza_id: number;
+  @ForeignKey(() => Ingredients)
   @Column({ type: DataType.INTEGER, allowNull: false })
   ingredient_id: number;
 }

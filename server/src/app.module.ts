@@ -7,6 +7,10 @@ import { OrderModule } from './order/order.module';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { SequelizeModule } from '@nestjs/sequelize';
+import { Ingredients, Pizza, PizzaIngredients } from './pizza/pizza.model';
+import { Cart, CartItems } from './cart/cart.model';
+import { Order, OrderItems } from './order/order.model';
+import { User } from './user/user.model';
 
 @Module({
   imports: [
@@ -19,7 +23,16 @@ import { SequelizeModule } from '@nestjs/sequelize';
       database: 'pizzastore',
       synchronize: true,
       autoLoadModels: true,
-      models: [],
+      models: [
+        Pizza,
+        PizzaIngredients,
+        Ingredients,
+        Cart,
+        CartItems,
+        Order,
+        OrderItems,
+        User,
+      ],
     }),
     PizzaModule,
     CartModule,

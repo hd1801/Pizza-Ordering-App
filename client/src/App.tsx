@@ -1,5 +1,9 @@
 import { Navbar, Container, Nav } from "react-bootstrap";
 import { Link, Route, Routes } from "react-router-dom";
+import { Cart } from "./Components/Cart";
+import { Home } from "./Components/Home";
+import { History } from "./Components/History";
+import { Login } from "./Components/Login";
 
 
 function App() {
@@ -22,10 +26,10 @@ function App() {
       </Container>
     </Navbar>
     <Routes>
-      <Route path="/" element = {<>home</>}></Route>
-      <Route path="/login" element = {<>login</>}></Route>
-      <Route path="/cart" element = {<>cart</>}></Route>
-      <Route path="/history" element = {<>history</>}></Route>
+      <Route path="/" element = {<Home/>}></Route>
+      <Route path="/login" element = {<Login/>}></Route>
+      <Route path="/cart" element = {<Cart/>}></Route>
+      <Route path="/history" element = {<History/>}></Route>
     </Routes>
     </>
   );

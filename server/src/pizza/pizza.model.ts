@@ -9,25 +9,29 @@ import {
 
 @Table
 export class Pizza extends Model {
-  @Column({ type: DataType.INTEGER, primaryKey: true })
+  @Column({ type: DataType.INTEGER, primaryKey: true, autoIncrement: true })
   pizza_id: number;
   @Column({ type: DataType.STRING, allowNull: false })
   crust_size: number;
-  @HasMany(() => PizzaIngredients)
+  @Column({ type: DataType.REAL })
+  price: number;
+  @HasMany(() => PizzaIngredients, { onDelete: 'CASCADE' })
   ingredients: PizzaIngredients[];
 }
 
 @Table
 export class Ingredients extends Model {
-  @Column({ type: DataType.INTEGER, primaryKey: true })
+  @Column({ type: DataType.INTEGER, primaryKey: true, autoIncrement: true })
   ingredient_id: number;
   @Column({ type: DataType.STRING, allowNull: false })
   name: string;
+  @Column({ type: DataType.REAL })
+  price: number;
 }
 
 @Table
 export class PizzaIngredients extends Model {
-  @Column({ type: DataType.INTEGER, primaryKey: true })
+  @Column({ type: DataType.INTEGER, primaryKey: true, autoIncrement: true })
   id: number;
   @ForeignKey(() => Pizza)
   @Column({ type: DataType.INTEGER, allowNull: false })

@@ -3,14 +3,14 @@ import { Order } from 'src/order/order.model';
 
 @Table
 export class User extends Model {
-  @Column({ type: DataType.INTEGER, primaryKey: true })
+  @Column({ type: DataType.INTEGER, primaryKey: true, autoIncrement: true })
   user_id: number;
   @Column({ type: DataType.STRING, allowNull: false })
-  user_name: string;
-  @Column({ type: DataType.STRING, allowNull: false })
+  name: string;
+  @Column({ type: DataType.STRING, allowNull: false, unique: true })
   email: string;
   @Column({ type: DataType.STRING, allowNull: false })
   password: string;
-  @HasMany(() => Order)
+  @HasMany(() => Order, { onDelete: 'CASCADE' })
   orders: Order[];
 }

@@ -8,5 +8,6 @@ import { PizzaController } from './pizza.controller';
   imports: [SequelizeModule.forFeature([Pizza, Ingredients, PizzaIngredients])],
   providers: [PizzaService],
   controllers: [PizzaController],
+  exports: [SequelizeModule],
 })
 export class PizzaModule {}

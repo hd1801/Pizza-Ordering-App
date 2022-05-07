@@ -31,6 +31,10 @@ export class CartService {
   }
 
   async createCart(cart: CreateCartDto) {
+    const cartExists = await Cart.findOne({ where: { user_id: cart.user_id } });
+    if (cartExists) {
+      return cartExists;
+    }
     return await Cart.create({ ...cart });
   }
   async addCartItems(cartItem: CreateCartItemDto, cart_id: number) {

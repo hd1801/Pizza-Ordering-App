@@ -4,25 +4,28 @@ import { Cart } from "./Components/Cart";
 import { Home } from "./Components/Home";
 import { History } from "./Components/History";
 import { Login } from "./Components/Login";
+import { UserContextProvider } from "./Authentication/user.provider";
+import { Register } from "./Components/Register";
 
 
 function App() {
   const linkStyle = {
+    margin:".25rem",
     textDecoration: "none",
     color:"#fff"
   }
   return (
-    <>
+    <UserContextProvider>
     <Navbar bg="danger" variant="dark" >
       <Container fluid={true} className="shadow">
         <Navbar.Brand>
         Pizza Ordering App
         </Navbar.Brand>
         <Nav className="justify-content-end">
-        <Nav.Link > <Link style={linkStyle} to="/">Home</Link></Nav.Link>
-        <Nav.Link > <Link style={linkStyle} to="/login">Login</Link></Nav.Link>
-        <Nav.Link > <Link style={linkStyle} to="/cart">Cart</Link></Nav.Link>
-        <Nav.Link > <Link style={linkStyle} to="/history">History</Link></Nav.Link>
+         <Link style={linkStyle} to="/">Home</Link>
+         <Link style={linkStyle} to="/login">Login</Link>
+         <Link style={linkStyle} to="/cart">Cart</Link>
+         <Link style={linkStyle} to="/history">History</Link>
         </Nav>    
       </Container>
     </Navbar>
@@ -31,8 +34,9 @@ function App() {
       <Route path="/login" element = {<Login/>}></Route>
       <Route path="/cart" element = {<Cart/>}></Route>
       <Route path="/history" element = {<History/>}></Route>
+      <Route path="/register" element = {<Register/>}></Route>
     </Routes>
-    </>
+    </UserContextProvider>
   );
 }
 

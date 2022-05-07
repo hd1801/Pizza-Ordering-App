@@ -15,7 +15,7 @@ export class Cart extends Model {
   @Column({ type: DataType.INTEGER, primaryKey: true, autoIncrement: true })
   cart_id: number;
   @ForeignKey(() => User)
-  @Column(DataType.INTEGER)
+  @Column({ type: DataType.INTEGER, unique: true })
   user_id: number;
   @HasMany(() => CartItems, { onDelete: 'CASCADE' })
   CartItems: CartItems[];

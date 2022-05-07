@@ -12,14 +12,20 @@ export class CartService {
   ) {}
 
   async getCarts() {
-    return await Cart.findAll({
+    return await this.cartModel.findAll({
       include: { model: CartItems, include: [Pizza] },
     });
   }
 
   async getCartsByID(id: number) {
-    return await Cart.findOne({
+    return await this.cartModel.findOne({
       where: { id },
+      include: { model: CartItems, include: [Pizza] },
+    });
+  }
+  async getCartsByUserID(user_id: number) {
+    return await this.cartModel.findOne({
+      where: { user_id },
       include: { model: CartItems, include: [Pizza] },
     });
   }
@@ -28,9 +34,12 @@ export class CartService {
     return await Cart.create({ ...cart });
   }
   async addCartItems(cartItem: CreateCartItemDto, cart_id: number) {
-    return await CartItems.create({ ...cartItem, cart_id });
+    return await this.cartItemsModel.create({ ...cartItem, cart_id });
   }
   async removeCart(cart_id: number) {
-    return await Cart.destroy({ where: { cart_id } });
+    return await this.cartModel.destroy({ where: { cart_id } });
+  }
+  async removeCartItem(id: number) {
+    return await this.cartItemsModel.destroy({ where: { id } });
   }
 }

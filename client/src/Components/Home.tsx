@@ -32,17 +32,33 @@ export const Home  = ()=>{
        const res = await fetch('http://localhost:3333/pizza/',options)
        const pizza = await res.json()
        await fetch(`http://localhost:3333/pizza/${pizza.pizza_id}/ingredients`,options)
+
+       //this part is contains complex calls to add each pizza in the cart 
        if(userInfo.loggedIn){
-        const cart = await fetch(`http://localhost:3333/cart`,{...options,body:JSON.stringify({
-            user_id: userInfo.userInfo.user.user_id
-        })})
-        const cartinfo:any = await cart.json()
-        localStorage.setItem('cart_id',cartinfo.cart_id);    
-        navigate('../cart',{state:pizza});
-       }
-       else{
-           navigate('Login');
-       }
+           //if cart already exist we will get cart info.
+                const cart = await fetch(`http://localhost:3333/cart`,{...options,body:JSON.stringify({
+                    user_id: userInfo.userInfo.user.user_id
+                })})
+                const cartinfo:any = await cart.json()
+                const cartbody = {
+                    cart_id:cartinfo.cart_id,
+                    pizza_id: pizza.pizza_id
+                }
+                const cartoptions = {
+                    method: 'POST',
+                    headers: {
+                    'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(cartbody),
+                    };
+
+                fetch(`http://localhost:3333/cart/${cartinfo.cart_id}`,cartoptions).then(res=>res.json())
+                localStorage.setItem('cart_id',cartinfo.cart_id);    
+                navigate('../cart',{state:pizza});
+            }
+        else{
+            navigate('Login');
+        }
 
     } 
     const renderIngredients = (ingredients:any)=>{

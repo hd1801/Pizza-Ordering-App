@@ -37,7 +37,6 @@ export const Login  = ()=>{
         if(data){
             userInfo.setUserInfo(data);
             userInfo.setLoggedIn(true);
-           localStorage.setItem('token',userInfo.userInfo.token);
             navigate('../',{replace:true});
         }
         console.log(data);

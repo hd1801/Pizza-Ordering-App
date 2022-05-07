@@ -1,7 +1,11 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { Pizza } from 'src/pizza/pizza.model';
-import { CreateOrderDto, CreateOrderItemDto } from './dto/order.dto';
+import {
+  CreateOrderDto,
+  CreateOrderItemDto,
+  CreateMultipleOrderItemDto,
+} from './dto/order.dto';
 import { Order, OrderItems } from './order.model';
 
 @Injectable()
@@ -31,7 +35,17 @@ export class OrderService {
   async createOrder(order: CreateOrderDto) {
     return this.OrderModel.create({ ...order });
   }
-  async addOrderItems(orderItem: CreateOrderItemDto, order_id: number) {
+  async addOrderItem(orderItem: CreateOrderItemDto, order_id: number) {
     return this.OrderItemModel.create({ ...orderItem, order_id });
+  }
+  async addOrderItems(
+    orderItems: CreateMultipleOrderItemDto,
+    order_id: number,
+  ) {
+    Logger.log(orderItems);
+    for (const pizza_id of orderItems.pizza_id) {
+      await this.OrderItemModel.create({ pizza_id, order_id });
+    }
+    return await this.OrderItemModel.findAll({ where: { order_id } });
   }
 }

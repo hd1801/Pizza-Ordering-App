@@ -16,7 +16,8 @@ export const History = ()=>{
                 'Content-Type': 'application/json',
                 },
                 };
-                fetch(`http://localhost:3333/order/${userInfo.userInfo.user.user_id}`,options).then(res=>res.json()).then(data=>setOrders(data));
+                console.log(userInfo.userInfo.user.user_id)
+                fetch(`http://localhost:3333/order/user/${userInfo.userInfo.user.user_id}`,options).then(res=>res.json()).then(data=>setOrders(data));
             }
             else{
                 navigate('../error',{replace:true})

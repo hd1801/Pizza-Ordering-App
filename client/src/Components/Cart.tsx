@@ -29,6 +29,7 @@ export const Cart = ()=>{
             email: userInfo.userInfo.user.email,
             pizza_id:orders
         }
+        console.log(orders);
         const options = {
             method: 'POST',
             headers: {
@@ -41,7 +42,7 @@ export const Cart = ()=>{
         const data:any = await res.json();
         await fetch(`http://localhost:3333/order/${data.order_id}/items`,options)
         await fetch(`http://localhost:3333/cart/${cartData.items.cart_id}`,{method:'DELETE'});
-        alert("pizza ordered!");
+        await alert("pizza ordered!");
         navigate('../history',{replace: true});
     }   
 

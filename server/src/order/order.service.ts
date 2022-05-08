@@ -33,16 +33,17 @@ export class OrderService {
     });
   }
   async createOrder(order: CreateOrderDto) {
-    const orderExists = this.OrderModel.findOne({
+    const orderExists = await this.OrderModel.findOne({
       where: { user_id: order.user_id },
     });
+    Logger.log(orderExists);
     if (orderExists) {
       return orderExists;
     }
-    return this.OrderModel.create({ ...order });
+    return await this.OrderModel.create({ ...order });
   }
   async addOrderItem(orderItem: CreateOrderItemDto, order_id: number) {
-    return this.OrderItemModel.create({ ...orderItem, order_id });
+    return await this.OrderItemModel.create({ ...orderItem, order_id });
   }
   async addOrderItems(
     orderItems: CreateMultipleOrderItemDto,

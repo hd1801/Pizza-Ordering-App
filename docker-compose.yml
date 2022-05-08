@@ -1,0 +1,38 @@
+version: '3.8'
+services:
+  pizzastore: 
+    image: postgres
+    restart: always
+    container_name: pizzastore
+    network_mode: "host"
+    volumes:
+      - pizzastore-vol:/var/lib/postgres/data
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_DB=pizzastore
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+    build: ./server
+
+  pizzastore-server:
+    build: ./server
+    network_mode: "host"
+    container_name: pizzastore-server
+    ports:
+      - 3333:3333
+    depends_on:
+      - pizzastore
+    links:
+     - pizzastore
+  pizzastore-client:
+    network_mode: "host"
+    build: ./client
+    container_name: pizzastore-client
+    ports:
+      - 3000:3000
+    links:
+      - pizzastore-app:pizzastore-app
+volumes:
+  pizzastore-vol:
+    driver: local

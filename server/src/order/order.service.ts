@@ -33,6 +33,12 @@ export class OrderService {
     });
   }
   async createOrder(order: CreateOrderDto) {
+    const orderExists = this.OrderModel.findOne({
+      where: { user_id: order.user_id },
+    });
+    if (orderExists) {
+      return orderExists;
+    }
     return this.OrderModel.create({ ...order });
   }
   async addOrderItem(orderItem: CreateOrderItemDto, order_id: number) {

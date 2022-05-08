@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { Form, Row, Col, Card, Button, Container } from "react-bootstrap"
+import { useNavigate } from "react-router-dom";
 import { RegisterInterface } from "../Interfaces/register.interface";
 
 export const Register  = ()=>{
+    const navigate = useNavigate()
     const [formData,setFormData] = useState<RegisterInterface>({
         name:"",
         email:"",
@@ -32,6 +34,8 @@ export const Register  = ()=>{
             };
         const res = await fetch('http://localhost:3333/auth/signin',options)
         const data =  await res.json();
+        alert("registration complete. login to continue");
+        navigate('../login',{replace:true});
         console.log(data)
     }
     return <>

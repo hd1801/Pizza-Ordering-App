@@ -19,7 +19,7 @@ export class CartService {
 
   async getCartsByID(id: number) {
     return await this.cartModel.findOne({
-      where: { id },
+      where: { cart_id: id },
       include: { model: CartItems, include: [Pizza] },
     });
   }

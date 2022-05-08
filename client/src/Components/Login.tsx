@@ -36,11 +36,16 @@ export const Login  = ()=>{
         const data =  await res.json();
         if(data){
             userInfo.setUserInfo(data);
-            userInfo.setLoggedIn(true);
+            if('user' in userInfo.userInfo){
+                userInfo.setLoggedIn(true);
+                alert("Logged in");
             navigate('../',{replace:true});
+            }
+            else {
+                alert('invalid credentials');
+            }
+            
         }
-        console.log(data);
-        console.log(userInfo);
     }
     return <>
     <Card className="m-5 p-3 " >

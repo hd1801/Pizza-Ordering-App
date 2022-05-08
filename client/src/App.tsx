@@ -6,6 +6,7 @@ import { History } from "./Components/History";
 import { Login } from "./Components/Login";
 import { UserContextProvider } from "./Authentication/user.provider";
 import { Register } from "./Components/Register";
+import ErrorHandler from "./Components/ErrorHandler"
 
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
       <Route path="/cart" element = {<Cart/>}></Route>
       <Route path="/history" element = {<History/>}></Route>
       <Route path="/register" element = {<Register/>}></Route>
+      <Route path="/error" element = {<ErrorHandler/>}></Route>
     </Routes>
     </UserContextProvider>
   );
